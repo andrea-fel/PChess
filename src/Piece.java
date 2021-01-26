@@ -13,4 +13,9 @@ public class Piece {
         this.isBlack = isBlack;
         this.isCaptured = isCaptured;
     }
+
+    public static String pieceName(int i) {
+        String[] names = {"T", "C", "F", "D", "R", "F", "C", "T"};
+        return names[i];
+    }
 }

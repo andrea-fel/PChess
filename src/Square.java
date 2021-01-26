@@ -5,7 +5,7 @@ public class Square {
 
     public Square(int i, int j) {
         this.rank = (char) ('1' + i);
-        this.column = (char) ('a' + i);
+        this.column = (char) ('a' + j);
     }
 
     public boolean isBlack() {

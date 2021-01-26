@@ -1,28 +1,31 @@
 import processing.core.PApplet;
 
+import java.util.Arrays;
+
 public class Board {
     Square[][] square = new Square[8][8];
 
     public Board() {
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
-                square[i][j] = new Square(i, j);
+        for (int x = 0; x < 8; x++) {
+            for (int y = 0; y < 8; y++) {
+                square[x][y] = new Square(x, y);
             }
         }
 
-        for (int i = 0; i < 8; ++i) {
-            square[0][i].piece = new Piece(pieceName(i), false, false);
-            square[1][i].piece = new Piece("pawn", false, false);
+        for (int x = 0; x < 8; ++x) {
+            square[x][0].piece = new Piece(Piece.pieceName(x), false, false);
+            square[x][1].piece = new Piece("P", false, false);
         }
 
-        for (int i = 0; i < 8; ++i) {
-            square[7][i].piece = new Piece(pieceName(7-i), true, false);
-            square[6][i].piece = new Piece("pawn", true, false);
+        for (int y = 2; y < 6; ++y) {
+            for (int x = 0; x < 8; ++x) {
+                square[x][y].piece = new Piece("", true, false);
+            }
         }
-    }
 
-    public static String pieceName(int i) {
-        String[] names = {"rook", "knight", "bishop", "queen", "king", "bishop", "knight", "rook"};
-        return names[i];
+        for (int x = 0; x < 8; ++x) {
+            square[x][6].piece = new Piece("P", true, false);
+            square[x][7].piece = new Piece(Piece.pieceName(7-x), true, false);
+        }
     }
 }
