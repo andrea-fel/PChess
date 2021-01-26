@@ -19,7 +19,7 @@ public class Board {
 
         for (int y = 2; y < 6; ++y) {
             for (int x = 0; x < 8; ++x) {
-                square[x][y].piece = new Piece("", true, false);
+                square[x][y].piece = new Piece("", true, true);
             }
         }
 

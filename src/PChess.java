@@ -29,14 +29,16 @@ public class PChess extends PApplet{
     }
 
     private void drawPiece(int x, int y, Piece piece) {
-        int col = piece.isBlack ? 0 : 255;
-        fill(col);
-        ellipse((x + 0.5f)* sqSize, (y + 0.5f)* sqSize, sqSize *0.7f, sqSize *0.7f);
-        textSize(sqSize * 0.5f);
-        textAlign(CENTER, CENTER);
-        col = piece.isBlack ? 255 : 0;
-        fill(col);
-        text(piece.name, (x + 0.5f) * sqSize, (y + 0.5f) * sqSize);
+        if (!piece.isCaptured) {
+            int col = piece.isBlack ? 0 : 255;
+            fill(col);
+            ellipse((x + 0.5f) * sqSize, (y + 0.5f) * sqSize, sqSize * 0.7f, sqSize * 0.7f);
+            textSize(sqSize * 0.5f);
+            textAlign(CENTER, CENTER);
+            col = piece.isBlack ? 255 : 0;
+            fill(col);
+            text(piece.name, (x + 0.5f) * sqSize, (y + 0.5f) * sqSize);
+        }
     }
 
     private void drawSquare(Square square) {
