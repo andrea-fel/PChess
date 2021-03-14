@@ -7,11 +7,15 @@ public class Knight extends Piece{
 
     @Override
     public void setPosition(int x, int y) {
-        boolean frontMove = Math.abs(this.x - x) == 1 && Math.abs(this.y - y) == 2;
-        boolean sideMove = Math.abs(this.x - x) == 2 && Math.abs(this.y - y) == 1;
-        if (frontMove || sideMove) {
+        if (isAllowedMove(x,y)) {
             this.x = x;
             this.y = y;
         }
+    }
+
+    public boolean isAllowedMove(int x, int y) {
+        boolean frontMove = Math.abs(this.x - x) == 1 && Math.abs(this.y - y) == 2;
+        boolean sideMove = Math.abs(this.x - x) == 2 && Math.abs(this.y - y) == 1;
+        return frontMove || sideMove;
     }
 }

@@ -42,4 +42,25 @@ public class Piece {
         this.x = x;
         this.y = y;
     }
+
+    public boolean isCaptured() {
+        return isCaptured;
+    }
+
+    public boolean isAllowedMove(int x, int y){
+        return true;
+    }
+
+    public boolean isBlockedByPiece(Piece piece, int endX, int endY) {
+        return false;
+    }
+
+    public boolean IsPieceOnIntermediatePositions(Piece piece, int[] intermediateX, int[] intermediateY) {
+        for (int i = 0; i < intermediateX.length; ++i) {
+            if (piece.x == intermediateX[i] && piece.y == intermediateY[i]) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

@@ -36,7 +36,7 @@ public class PChess extends PApplet {
         int x = mouseX / size;  // donne la colonne dans laquelle se trouve la souri
         int y = mouseY / size;  // donne la ligne dans laquelle se trouve la souri
         for (Piece p : pieces) {
-            if (x == p.getX() && y == p.getY()) {
+            if (selectedPiece.isBlockedByPiece(p,x,y)) {
                 selectedPiece = null;
                 break;
             }
@@ -58,7 +58,9 @@ public class PChess extends PApplet {
         textSize(size * 0.4f);
         noStroke();
         for (Piece p : pieces) {
-            drawPiece(p);
+            if (!p.isCaptured()) {
+                drawPiece(p);
+            }
         }
     }
 

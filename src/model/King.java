@@ -7,9 +7,14 @@ public class King extends Piece{
 
     @Override
     public void setPosition(int x, int y) {
-        if(Math.abs(this.x - x) <= 1 && Math.abs(this.y - y) <= 1) {
+        if(isAllowedMove(x,y)) {
             this.x = x;
             this.y = y;
         }
+    }
+
+    @Override
+    public boolean isAllowedMove(int x, int y) {
+        return Math.abs(this.x - x) <= 1 && Math.abs(this.y - y) <= 1;
     }
 }
