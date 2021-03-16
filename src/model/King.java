@@ -17,4 +17,10 @@ public class King extends Piece{
     public boolean isAllowedMove(int x, int y) {
         return Math.abs(this.x - x) <= 1 && Math.abs(this.y - y) <= 1;
     }
+
+    @Override
+    public boolean isBlockedByPiece(Piece piece, int endX, int endY) {
+        if(isAllowedMove(endX,endY)) return false;
+        else return true;
+    }
 }

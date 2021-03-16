@@ -1,6 +1,6 @@
 package model;
 
-public class Piece {
+public abstract class Piece {
     protected final String name;
     protected int x;
     protected int y;
@@ -38,24 +38,21 @@ public class Piece {
         return isBlack;
     }
 
-    public void setPosition(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
-
     public boolean isCaptured() {
         return isCaptured;
     }
 
-    public boolean isAllowedMove(int x, int y){
-        return true;
+    public void setCaptured(boolean captured) {
+        isCaptured = captured;
     }
 
-    public boolean isBlockedByPiece(Piece piece, int endX, int endY) {
-        return false;
-    }
+    public abstract void setPosition(int x, int y);
 
-    public boolean IsPieceOnIntermediatePositions(Piece piece, int[] intermediateX, int[] intermediateY) {
+    public abstract boolean isAllowedMove(int x, int y);
+
+    public abstract boolean isBlockedByPiece(Piece piece, int endX, int endY);
+
+    public boolean isPieceOnIntermediatePositions(Piece piece, int[] intermediateX, int[] intermediateY) {
         for (int i = 0; i < intermediateX.length; ++i) {
             if (piece.x == intermediateX[i] && piece.y == intermediateY[i]) {
                 return true;

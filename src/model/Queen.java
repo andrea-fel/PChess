@@ -27,7 +27,7 @@ public class Queen extends Piece{
             int[] intermediateX = new int[displacement - 1];
             int[] intermediateY = new int[displacement - 1];
             calculateIntermediateQueenPositions(endX, endY, intermediateX, intermediateY);
-            return IsPieceOnIntermediatePositions(piece,intermediateX,intermediateY);
+            return isPieceOnIntermediatePositions(piece,intermediateX,intermediateY);
         } else return true;
     }
 

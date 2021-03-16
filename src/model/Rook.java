@@ -25,7 +25,7 @@ public class Rook extends Piece{
             int[] intermediateX = new int[displacement - 1];
             int[] intermediateY = new int[displacement - 1];
             calculateIntermediateRookPositions(endX, endY, intermediateX, intermediateY);
-            return IsPieceOnIntermediatePositions(piece, intermediateX, intermediateY);
+            return isPieceOnIntermediatePositions(piece, intermediateX, intermediateY);
         }
         else return true;
     }

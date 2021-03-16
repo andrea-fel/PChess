@@ -13,9 +13,16 @@ public class Knight extends Piece{
         }
     }
 
+    @Override
     public boolean isAllowedMove(int x, int y) {
         boolean frontMove = Math.abs(this.x - x) == 1 && Math.abs(this.y - y) == 2;
         boolean sideMove = Math.abs(this.x - x) == 2 && Math.abs(this.y - y) == 1;
         return frontMove || sideMove;
+    }
+
+    @Override
+    public boolean isBlockedByPiece(Piece piece, int endX, int endY) {
+        if(isAllowedMove(endX,endY)) return false;
+        else return true;
     }
 }

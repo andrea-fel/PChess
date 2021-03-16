@@ -13,22 +13,24 @@ public class Pawn extends Piece {
         }
     }
 
-    public boolean isAllowedMove(int x, int y) {
+    @Override
+    public boolean isAllowedMove(int endX, int endY) {
         int move1 = isBlack ? 1 : -1;
         int move2 = isBlack ? 2 : -2;
         int initialPosition = isBlack ? 1 : 6;
-        boolean firstMove = this.y == initialPosition && this.x == x && this.y + move2 == y;
-        boolean otherMove = this.x == x && this.y + move1 == y;
+        boolean firstMove = this.y == initialPosition && this.x == endX && this.y + move2 == endY;
+        boolean otherMove = this.x == endX && this.y + move1 == endY;
         return firstMove || otherMove;
     }
 
+    @Override
     public boolean isBlockedByPiece(Piece piece, int endX, int endY) {
         if (isAllowedMove(endX,endY)) {
             int displacement = Math.abs(endY - this.y);
             int[] intermediateX = new int[displacement];
             int[] intermediateY = new int[displacement];
             calculateIntermediatePawnPositions(endY, intermediateX, intermediateY);
-            return IsPieceOnIntermediatePositions(piece, intermediateX, intermediateY);
+            return isPieceOnIntermediatePositions(piece, intermediateX, intermediateY);
         }
         else return true;
     }
