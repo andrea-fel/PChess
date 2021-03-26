@@ -15,7 +15,7 @@ public class Rook extends Piece{
 
     @Override
     public boolean isAllowedMove(int x, int y) {
-        return this.x == x || this.y == y;
+        return this.x == x ^ this.y == y;
     }
 
     @Override

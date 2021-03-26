@@ -15,8 +15,8 @@ public class Queen extends Piece{
 
     @Override
     public boolean isAllowedMove(int x, int y) {
-        boolean straightMove = this.x == x || this.y == y;
-        boolean diagonalMove = Math.abs(this.x - x) == Math.abs(this.y - y);
+        boolean straightMove = this.x == x ^ this.y == y;
+        boolean diagonalMove = Math.abs(this.x - x) == Math.abs(this.y - y) && Math.abs(this.x - x) != 0;
         return straightMove || diagonalMove;
     }
 

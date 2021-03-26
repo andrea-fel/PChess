@@ -15,7 +15,7 @@ public class Bishop extends Piece{
 
     @Override
     public boolean isAllowedMove(int x, int y) {
-        return Math.abs(this.x - x) == Math.abs(this.y - y);
+        return Math.abs(this.x - x) == Math.abs(this.y - y) && Math.abs(this.x - x) != 0;
     }
 
     @Override
