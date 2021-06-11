@@ -1,6 +1,7 @@
 package model;
 
 public class Bishop extends Piece{
+
     public Bishop(String name, int x, int y, boolean isBlack) {
         super(name, x, y, isBlack);
     }

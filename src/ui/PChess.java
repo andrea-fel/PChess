@@ -7,25 +7,32 @@ import java.util.List;
 
 public class PChess extends PApplet {
     public int size = 100;     // taille d'une case
-    List<Piece> pieces = InitializeGame.buildPieces();
+    List<Piece> pieces;
     Piece selectedPiece = null;
     boolean isBlackTurn = false;
+    boolean write = false;
+
+    public PChess(List<Piece> pieces) {
+        this.pieces = pieces;
+    }
 
     @Override
     public void settings() {
-        size(8 * size, 8 * size);
+        size(8 * size, 8 * size + 50);
     }
 
     @Override
     public void draw() {
         drawCases();
         drawPieces();
+        drawInfoBar(write);
     }
 
     @Override
     public void mousePressed() {
         int x = mouseX / size;  // donne la colonne dans laquelle se trouve la souri
         int y = mouseY / size;  // donne la ligne dans laquelle se trouve la souri
+        write = false;
         for (Piece p : pieces) {
             if (x == p.getX() && y == p.getY() && isBlackTurn == p.isBlack()) {
                 selectedPiece = p;
@@ -37,15 +44,24 @@ public class PChess extends PApplet {
     public void mouseReleased() {
         int x = mouseX / size;  // donne la colonne dans laquelle se trouve la souri
         int y = mouseY / size;  // donne la ligne dans laquelle se trouve la souri
-        if (selectedPiece != null) {
-            for (Piece p : pieces) {
-                if (selectedPiece.isBlockedByPiece(p, x, y) && !p.isCaptured()) {
+        checkIfSelectedPieceIsBlocked(x, y);
+        checkIfSelectedPieceTakesPiece(x, y);
+        moveSelectedPiece(x, y);
+    }
+
+    public void moveSelectedPiece(int x, int y) {
+        for (Piece p : pieces) {
+                if (p == selectedPiece) {
+                    p.setPosition(x, y);
                     selectedPiece = null;
+                    isBlackTurn = !isBlackTurn;
                     break;
                 }
             }
-        }
-        if (selectedPiece != null) {
+    }
+
+    public void checkIfSelectedPieceTakesPiece(int x, int y) {
+        try {
             if (selectedPiece.getName().equals("P") && Math.abs(selectedPiece.getX() - x) == 1) {
                 int counter = 0;
                 for (Piece p : pieces) {
@@ -65,18 +81,37 @@ public class PChess extends PApplet {
                     }
                 }
             }
+        } catch(NullPointerException ex) {
+            write = true;
         }
+    }
+
+    public void checkIfSelectedPieceIsBlocked(int x, int y) {
+        try {
             for (Piece p : pieces) {
-                if (p == selectedPiece) {
-                    p.setPosition(x, y);
+                if (selectedPiece.isBlockedByPiece(p, x, y) && !p.isCaptured()) {
                     selectedPiece = null;
-                    isBlackTurn = !isBlackTurn;
                     break;
                 }
             }
+        } catch(NullPointerException ex) {
+            write = true;
         }
+    }
 
-        /**
+    private void drawInfoBar(boolean condition) {
+        if (condition) {
+            textSize(32);
+            text("Move not allowed", 180, 820);
+        }
+        else {
+            fill(100);
+            rect(0, 8 * size, 8 * size, 50);
+        }
+    }
+
+
+    /**
          * dessine les pièces
          */
         private void drawPieces () {
@@ -110,6 +145,7 @@ public class PChess extends PApplet {
          * @param piece est une instance de model.Piece
          */
         private void drawPiece (Piece piece){
+            textSize(20);
             if (!piece.isCaptured()) {
                 if (piece != selectedPiece) {
                     if (piece.isBlack()) fill(165, 42, 42);
@@ -127,9 +163,5 @@ public class PChess extends PApplet {
                     text(piece.getName(), mouseX - size / 2f, mouseY - size / 1.8f, size, size);
                 }
             }
-        }
-
-        public static void main (String[]args){
-            PApplet.runSketch(new String[]{"ui.PChess"}, new PChess());
         }
     }

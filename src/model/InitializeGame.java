@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InitializeGame {
-    public static List<Piece> buildPieces() {
+    public List<Piece> buildPieces() {
         List<Piece> pieces = new ArrayList<>();
         pieces.add(new Rook("T", 0, 0, true));
         pieces.add(new Knight("C", 1, 0, true));
